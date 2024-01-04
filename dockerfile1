@@ -1,0 +1,4 @@
+FROM ubuntu
+MAINTAINER dhiraj
+COPY install-docker.sh /tmp
+RUN sh /tmp/install-docker.sh

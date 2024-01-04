@@ -1,0 +1,6 @@
+FROM ubuntu
+MAINTAINER dhiraj
+
+RUN apt-get update
+RUN apt-get install -y software-properties-common
+RUN apt install -y ansible
