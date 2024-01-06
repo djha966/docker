@@ -9,7 +9,7 @@ services:
       replicas: 2
       replacement:
         constrains:
-          - node.hostname = worker2
+          - node.hostname == worker2
   qaserver:
     image: tomee
     ports:
@@ -18,8 +18,8 @@ services:
       replicas: 3
       replacement:
         constrains:
-          - node.hostname = worker1
-          - node.hostname = worker2
+          - node.hostname == worker1
+          - node.hostname == worker2
   prodserver:
     images: tomee
     ports:
@@ -28,4 +28,4 @@ services:
       replicas: 4
       replacement:
         constrains:
-          - node.hostname = worker1
+          - node.hostname != worker1
