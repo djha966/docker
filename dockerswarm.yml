@@ -1,0 +1,31 @@
+---
+version: "3.8"
+services:
+  myjenkins:
+    image: jenkins/jenkins
+    ports:
+      - 6060:8080
+    deploy:
+      replicas: 2
+      replacement:
+        constrains:
+          - node.hostname = worker2
+  qaserver:
+    image: tomee
+    ports:
+      - 7070:8080
+    deploy:
+      replicas: 3
+      replacement:
+        constrains:
+          - node.hostname = worker1
+          - node.hostname = worker2
+  prodserver:
+    images: tomee
+    ports:
+      - 9090:8080
+    deploy:
+      replicas: 4
+      replacement:
+        constrains:
+          - node.hostname = worker1
