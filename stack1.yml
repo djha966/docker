@@ -1,0 +1,45 @@
+---
+version: '3.8'
+services:
+
+  mydb:
+    image: postgres
+    environment:
+      POSTGRES_USER_FILE: /run/secret/pg_user
+      POSTGRES_PASSWORD_FILE: /run/secret/pg_password
+      POSTGRES_DB_FILE: /run/secret/pg_db
+    secrets:
+      - pg_user
+      - pg_password
+      - pg_db
+    deploy:
+      replicas: 2
+      placement:
+        constraints:
+          - node.hostname == worker1
+    resources:
+      limits:
+        cpus: '0.01'
+        memory: 100M
+    volumes:
+      - myvolumes:/var/lib/postgresql/data
+
+  mydminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    deploy:
+      replicas: 2
+
+volumes:
+  myvolumes: {}
+
+secrets:
+  pg_user:
+    external: true
+  pg_password:
+    external: true
+  pg_db:
+    external: true
+
+...
