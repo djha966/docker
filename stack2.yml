@@ -1,0 +1,23 @@
+---
+version: '3.8'
+services:
+  mydb:
+    image: mysql:5
+    environment:
+      MYSQL_ROOT_PASSWORD: dhiraj1
+    deploy:
+      replicas: 2
+      placement:
+        constraints:
+          - node.hostname == worker1
+
+  mywordpress:
+    image: wordpress
+    ports:
+      - 9090:80
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == worker1
+...
