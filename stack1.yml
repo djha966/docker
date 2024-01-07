@@ -17,10 +17,10 @@ services:
       placement:
         constraints:
           - node.hostname == worker1
-    resources:
-      limits:
-        cpus: '0.01'
-        memory: 100M
+      resources:
+        limits:
+          cpus: '0.01'
+          memory: 100M
     volumes:
       - myvolumes:/var/lib/postgresql/data
 
